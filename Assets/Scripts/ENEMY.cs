@@ -7,9 +7,9 @@ public class ENEMY : MonoBehaviour
     public float speed;
     public float stoppingDistance;
     public float retreatDistance;
-    //private float timebtwShots;
-    //public float startTimebtwShots;
-    //public GameObject projectile;
+    private float timebtwShots;
+    public float startTimebtwShots;
+    public GameObject projectile;
 
     public Transform player;
 
@@ -17,10 +17,10 @@ public class ENEMY : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        //timebtwShots = startTimebtwShots;
+        timebtwShots = startTimebtwShots;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (Vector2.Distance(transform.position, player.position) > stoppingDistance)
@@ -35,15 +35,15 @@ public class ENEMY : MonoBehaviour
 
             transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
         }
-        //if (timebtwShots <= 0)
-        //{
-        //    //Instantiate(projectile, transform.position, Quaternion.identity);
-        //    //timebtwShots = startTimebtwShots;
-        //}
-        //else
-        //{
-        //    timebtwShots -= Time.deltaTime;
-        //}
+        if (timebtwShots <= 0)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            timebtwShots = startTimebtwShots;
+        }
+        else
+        {
+            timebtwShots -= Time.deltaTime;
+        }
         
     }
 }
